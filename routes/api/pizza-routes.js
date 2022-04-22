@@ -1,6 +1,15 @@
 //SET-UP FOR EXPRESS.JS
 const router = require('express').Router();
 
+//IMPORT FUNCTIONALITY VIA CONTROLLER METHODS
+const {
+    getAllPizza,
+    getPizzaById,
+    createPizza,
+    updatePizza,
+    deletePizza
+} = require('../../controllers/pizza-controller');
+
 //SET GET AND POST ROUTES TO  /API/PIZZAS
 router
     .route('/')
