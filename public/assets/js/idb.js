@@ -43,17 +43,17 @@ function saveRecord(record) {
 
 
 function uploadPizza() {
-    // open a transaction on your pending db
+    //OPEN A TRANSACTION ON YOUR DB
     const transaction = db.transaction(['new_pizza'], 'readwrite');
 
-    // access your pending object store
+    //ACCESS THE OBJECT STORE
     const pizzaObjectStore = transaction.objectStore('new_pizza');
 
-    // get all records from store and set to a variable
+    //SET ALL RECORDS TO A VARIABLE
     const getAll = pizzaObjectStore.getAll();
 
     getAll.onsuccess = function () {
-        // if there was data in indexedDb's store, let's send it to the api server
+        //SEND LOCALLY STORED DATA FROM INDEXEDDB'S STORE TO THE API'S SERVER USING A FETCH()
         if (getAll.result.length > 0) {
             fetch('/api/pizzas', {
                 method: 'POST',
@@ -68,19 +68,21 @@ function uploadPizza() {
                     if (serverResponse.message) {
                         throw new Error(serverResponse);
                     }
-
+                    //OPEN ONE MORE TRANSACTION
                     const transaction = db.transaction(['new_pizza'], 'readwrite');
                     const pizzaObjectStore = transaction.objectStore('new_pizza');
-                    // clear all items in your store
+                    //CLEAR-OUT STORE
                     pizzaObjectStore.clear();
+
+                    alert('All saved pizza has been submitted!');
                 })
                 .catch(err => {
-                    // set reference to redirect back here
+                    //REDIRECT REFERENCE
                     console.log(err);
                 });
         }
     };
 }
 
-// listen for app coming back online
+//LISTEN FOR APP TO COME BACK ONLINE
 window.addEventListener('online', uploadPizza);
