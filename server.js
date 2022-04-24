@@ -16,6 +16,17 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/pizza-hun
     useUnifiedTopology: true
 });
 
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://ChristiLewis:3oLjRTEDWyVbXSUa@cluster0.ihk9u.mongodb.net/pizza-hunt?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+    const collection = client.db("test").collection("devices");
+    // perform actions on the collection object
+    client.close();
+});
+
+
 // Use this to log mongo queries being executed!
 mongoose.set('debug', true);
 
