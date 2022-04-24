@@ -65,8 +65,10 @@ const handlePizzaSubmit = event => {
       alert('Pizza created successfully!');
       console.log(postResponse);
     })
+    //UPDATED FOR INDEXEDDB
     .catch(err => {
       console.log(err);
+      saveRecord(formData);
     });
 };
 
