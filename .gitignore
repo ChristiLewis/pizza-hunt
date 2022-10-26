@@ -1,6 +1,7 @@
-node_modules/
-.env/
-.DS_Store/
+node_modules
+.env
+.DS_Store
+NPM i -RUN IN CLI TO BRING BACK NODE MODS.txt
 
 # Logs
 logs
